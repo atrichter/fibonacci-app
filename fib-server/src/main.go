@@ -8,6 +8,11 @@ import (
   "strconv"
 )
 
+func enableCors(w *http.ResponseWriter) {
+  (*w).Header().Set("Access-Control-Allow-Origin", "*")
+  (*w).Header().Set("Access-Control-Allow-Headers", "Content-Type")
+}
+
 func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
   fmt.Fprint(w, "Welcome!\n")
 }
@@ -17,8 +22,6 @@ func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Fibonacci(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-  fmt.Fprintf(w, "first %s fibonacci digits\n", ps.ByName("numDigits"))
-
   if numDigits, err := strconv.Atoi(ps.ByName("numDigits")); err == nil {
     num1 := int64(0)
     num2 := int64(1)
@@ -42,6 +45,9 @@ func Fibonacci(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
       fmt.Fprintf(w, ", %d", nextNum)
     }
   }
+
+  // add headers to allow cors
+  enableCors(&w)
 }
 
 func main() {
