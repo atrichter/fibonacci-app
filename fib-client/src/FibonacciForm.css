@@ -2,6 +2,16 @@ body {
   padding: 50px;
 }
 
+label {
+  display: block;
+}
+
+label.small {
+  color: #999;
+  font-size: .75em;
+  padding-top: 2px;
+}
+
 input {
   display: block;
   margin-top: 10px;
@@ -13,6 +23,7 @@ button {
   margin-top: 10px;
   background: #888;
   border: none;
+  border-radius: 5px;
   outline: none;
   color: white;
 }
@@ -23,4 +34,8 @@ button:hover {
 
 button:active {
   background-color: #777;
+}
+
+.results {
+  padding-top: 20px;
 }

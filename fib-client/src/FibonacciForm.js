@@ -5,62 +5,63 @@ import './FibonacciForm.css';
  * Component for rendering Fibonacci Form.
  */
 class FibonacciForm extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      numDigits: '',
+      res: ''
+    };
+
+    this.handleNumDigitsChange = this.handleNumDigitsChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    if (!event.target.checkValidity()) {
-      this.setState({
-        invalid: true,
-        displayErrors: true,
-      });
-      return;
+
+    if (this.state.numDigits !== '') {
+      const url = '/api/fibonacci/' + this.state.numDigits;
+
+      fetch(url)
+        .then(response => response.text())
+        .then(text => {this.setState({ res: text})})
+        .catch(error => console.log(error));
+
+    } else {
+      alert('Must enter a number')
     }
+  }
 
-    const form = event.target;
-    const data = new FormData(form);
-
-    this.setState({
-      res: data,
-      invalid: false,
-      displayErrors: false,
-    });
-
-    fetch('/api/fibonacci/5', {
-      method: 'POST',
-      body: data,
-    });
+  handleNumDigitsChange(event) {
+    const re = /^[0-9]*$/g;  // limit user to only enter numbers
+    if (re.test(event.target.value)) {
+      this.setState({ numDigits: event.target.value });
+    }
   }
 
   render() {
-    const { res, invalid, displayErrors } = this.state;
     return (
-      <div>
+      <div className="fibonacciForm">
         <h1>Andrew's Fibonacci Calculator</h1>
-        <form
-          onSubmit={this.handleSubmit}
-          noValidate
-          className={displayErrors ? 'displayErrors' : ''}
-        >
-          <label>Fibonacci Digits:</label>
+
+        <form onSubmit={this.handleSubmit}> 
+          <label>Number of Fibonacci Digits:</label>
+          <label className="small">(positive integer only please)</label>
           <input
             id="numDigits"
-            name="numDigits"
             type="text"
+            value={this.state.numDigits}
+            onChange={this.handleNumDigitsChange}
           />
-
-          <button>Submit</button>
+          <button type='submit'>Submit</button>
         </form>
-        
-        <div className="res-block">
-          {!invalid && res && (
+
+        <div className="results">
+          {this.state.res && (
             <div>
               <h3>Fibonacci Sequence:</h3>
-              <pre>{res}</pre>
+              <code>{this.state.res}</code>
             </div>
           )}
         </div>
