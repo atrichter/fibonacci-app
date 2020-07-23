@@ -14,7 +14,6 @@ class FibonacciForm extends React.Component {
     };
 
     this.handleNumDigitsChange = this.handleNumDigitsChange.bind(this);
-    
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,43 +21,20 @@ class FibonacciForm extends React.Component {
     event.preventDefault();
 
     if (this.state.numDigits !== '') {
-      console.log('numDigits ', this.state.numDigits, );
-
       const url = '/api/fibonacci/' + this.state.numDigits;
 
-      fetch(url , {
-        method: 'GET',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          // 'Accept': 'application/json',
-          // 'Content-Type': 'application/json',
-        },
-        mode: "cors",
-      })
-      .then(response => response.json())
-      .catch(error => console.log(error));
+      fetch(url)
+        .then(response => response.text())
+        .then(text => {this.setState({ res: text})})
+        .catch(error => console.log(error));
 
-
-      // fetch(url, {
-      //   headers: {
-      //     'Access-Control-Allow-Origin': '*',
-      //   },
-      // })
-      //   .then(response => response.json());
-
-
-      
-      // this.setState({ res: fetch(url) });
-
-
-      console.log(this.state.res);
     } else {
       alert('Must enter a number')
     }
   }
 
   handleNumDigitsChange(event) {
-    const re = /^[0-9]*$/g;
+    const re = /^[0-9]*$/g;  // limit user to only enter numbers
     if (re.test(event.target.value)) {
       this.setState({ numDigits: event.target.value });
     }
@@ -70,7 +46,7 @@ class FibonacciForm extends React.Component {
         <h1>Andrew's Fibonacci Calculator</h1>
 
         <form onSubmit={this.handleSubmit}> 
-          <label>Number of Fibonacci Digits</label>
+          <label>Number of Fibonacci Digits:</label>
           <label className="small">(positive integer only please)</label>
           <input
             id="numDigits"
@@ -81,14 +57,14 @@ class FibonacciForm extends React.Component {
           <button type='submit'>Submit</button>
         </form>
 
-        {/* <div className="res-block">
+        <div className="results">
           {this.state.res && (
             <div>
               <h3>Fibonacci Sequence:</h3>
-              <pre>{this.state.res}</pre>
+              <code>{this.state.res}</code>
             </div>
           )}
-        </div> */}
+        </div>
       </div>
     );
   }

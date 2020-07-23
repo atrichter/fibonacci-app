@@ -22,18 +22,22 @@ func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func Fibonacci(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+  // add headers to allow cors
+  enableCors(&w)
+
+  // only calculate fibonacci if numDigits converts to an integer
   if numDigits, err := strconv.Atoi(ps.ByName("numDigits")); err == nil {
     num1 := int64(0)
     num2 := int64(1)
     nextNum := int64(0)
 
-    for i := 1; i <= numDigits; i++ {
-      if(i == 1) {
+    for i := 0; i < numDigits; i++ {
+      if i == 0 {
         fmt.Fprintf(w, "%d", num1)
         continue
       }
 
-      if(i == 2) {
+      if i == 1 {
         fmt.Fprintf(w, ", %d", num2)
         continue
       }
@@ -42,12 +46,16 @@ func Fibonacci(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
       num1 = num2
       num2 = nextNum
 
-      fmt.Fprintf(w, ", %d", nextNum)
+      // check for integer overflow
+      if nextNum >= 0 {
+        fmt.Fprintf(w, ", %d", nextNum)
+        continue;
+      }
+      
+      fmt.Fprintf(w, ", ... (too large)")
+      break;
     }
   }
-
-  // add headers to allow cors
-  enableCors(&w)
 }
 
 func main() {

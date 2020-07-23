@@ -23,6 +23,7 @@ button {
   margin-top: 10px;
   background: #888;
   border: none;
+  border-radius: 5px;
   outline: none;
   color: white;
 }
@@ -33,4 +34,8 @@ button:hover {
 
 button:active {
   background-color: #777;
+}
+
+.results {
+  padding-top: 20px;
 }
