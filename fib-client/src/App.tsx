@@ -1,5 +1,5 @@
 import React from 'react';
-import FibonacciForm from './FibonacciForm';
+import FibonacciForm from './fibonacci/FibonacciForm';
 
 function App() {
   return (
