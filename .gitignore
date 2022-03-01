@@ -8,6 +8,8 @@
 
 # Dependencies
 **/node_modules
+**/.pnp
+**/.pnp.js
 
 # VSCode debugging config
 **/.vscode/
@@ -30,9 +32,9 @@ fib-server/fibonacci-app
 # Testing
 **/debug.test
 **/cover.out
+**/coverage
 
 # Misc
-**/coverage/
 **/debug
 **/__debug_bin
 **/npm-debug.log*
@@ -40,3 +42,7 @@ fib-server/fibonacci-app
 **/yarn-error.log*
 **/build
 **/react-app-env.d.ts
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
