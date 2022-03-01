@@ -1,0 +1,42 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# Binaries for programs and plugins
+**/*.exe
+**/*.so
+**/*.dylib
+**/.kube
+
+# Dependencies
+**/node_modules
+
+# VSCode debugging config
+**/.vscode/
+
+# Test binary, build with `go test -c`
+**/*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+**/*.out
+
+# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
+**/.glide/
+
+# MacOS folder config file
+**/.DS_Store
+
+# Binaries for programs and plugins
+fib-server/fibonacci-app
+
+# Testing
+**/debug.test
+**/cover.out
+
+# Misc
+**/coverage/
+**/debug
+**/__debug_bin
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/build
+**/react-app-env.d.ts
