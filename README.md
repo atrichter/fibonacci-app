@@ -15,8 +15,8 @@ By Andrew Richter
    `git clone https://github.com/atrichter/fibonacci-app.git`
 3. Set GOPATH in fib-server (on mac: `export GOPATH=~/6DegreesHealth/fib-server/`)
 4. In `fib-server`, start server with `go run main.go`
-5. In `fib-client`, install dependencies using `npm install`
-6. In `fib-client`, start using `npm start`
+5. In `fib-client`, install dependencies using `npm install` or `yarn install`
+6. In `fib-client`, start using `npm start` or `yarn start`
 7. Navigate to app in [browser](http://localhost:3000)
 
 
