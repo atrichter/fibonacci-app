@@ -1,10 +1,11 @@
 import React from 'react';
-import FibonacciForm from './fibonacci/FibonacciForm';
 
-function App() {
+import Fibonacci from './fibonacci/Fibonacci';
+
+function App(): JSX.Element {
   return (
     <div className="App">
-      <FibonacciForm />
+      <Fibonacci />
     </div>
   );
 }
